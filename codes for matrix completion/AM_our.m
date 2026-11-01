@@ -77,7 +77,7 @@ function [gamma] = AM_our_adp(dXY, Gz, eta, gamma_old)
 ak  = 0.3; 
 fz = sum(sum(dXY.*(Gz*dXY)));
 Qz = fz/sum(sum(dXY.*dXY))/ak;
-gam_check = max(Qz/2 - eta/4, 0) + 1e-3; 
+gam_check = max(Qz/2 - eta/4, 0) + 1e-5; 
 
 Gzs = abs(Gz);
 nm1 = sqrt(max(sum(Gzs,1)));
