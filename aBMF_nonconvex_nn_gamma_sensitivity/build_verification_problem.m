@@ -1,0 +1,26 @@
+function problem = build_verification_problem(dataset,x0,y0,epsilon_value,settings) % Construct one nonconvex PSD-lifted verification surrogate.
+d = dataset.input_dimension; % Read the transformed input dimension.
+m = dataset.hidden_units; % Read the hidden-layer width.
+problem.p = 1 + d + m; % Set the lifted matrix dimension for the vector [1;x;a].
+problem.index_x = 2:(1+d); % Define the lifted input-coordinate indices.
+problem.index_a = (2+d):(1+d+m); % Define the lifted activation-coordinate indices.
+problem.x0 = double(x0(:)); % Store the nominal transformed input.
+problem.y0 = double(y0); % Store the plus-or-minus-one class label.
+problem.lower_x = problem.x0 - epsilon_value; % Construct the lower infinity-norm box bound.
+problem.upper_x = problem.x0 + epsilon_value; % Construct the upper infinity-norm box bound.
+positive_weights = max(dataset.W1,0); % Extract the positive first-layer weights for interval propagation.
+negative_weights = min(dataset.W1,0); % Extract the negative first-layer weights for interval propagation.
+problem.lower_s = positive_weights*problem.lower_x + negative_weights*problem.upper_x + dataset.b1; % Compute interval lower bounds on all preactivations.
+problem.upper_s = positive_weights*problem.upper_x + negative_weights*problem.lower_x + dataset.b1; % Compute interval upper bounds on all preactivations.
+problem.W1 = dataset.W1; % Store the first-layer weight matrix.
+problem.b1 = dataset.b1; % Store the first-layer bias vector.
+problem.w2 = dataset.w2; % Store the output-layer weight vector.
+problem.b2 = dataset.b2; % Store the scalar output bias.
+problem.rho_eq = settings.rho_eq; % Store the affine-equality penalty weight.
+problem.rho_ineq = settings.rho_ineq; % Store the inequality-violation penalty weight.
+problem.rho_comp = settings.rho_comp; % Store the nonconvex complementarity penalty weight.
+problem.lambda_fro = settings.lambda_fro; % Store the lifted-matrix regularization weight.
+nominal_s = problem.W1*problem.x0 + problem.b1; % Compute the nominal preactivation vector.
+nominal_a = max(nominal_s,0); % Compute the nominal ReLU activation vector.
+problem.nominal_vector = [1;problem.x0;nominal_a]; % Construct the nominal rank-one lifted vector.
+end % Finish the verification-problem constructor.
