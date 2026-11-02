@@ -1,0 +1,3 @@
+function summary = example_synthetic() % Run a small standalone Max-Cut benchmark without external graph files.
+summary = run_maxcut_benchmark('graph_files',{},'synthetic_sizes',[300 1000],'ranks',20,'synthetic_probability',0.02,'num_trials',3,'rounds',100,'max_iter',1000,'tol',1e-6,'constraint_tol',1e-6,'epsilon',1e-6,'gamma0','auto','gamma_base',0.25,'rho0',1,'rho_growth',2,'rho_max',1e6,'multiplier_update_period',1,'full_sdp',true,'max_full_sdp_n',400,'output_dir',fullfile(pwd,'maxcut_results_synthetic')); % Run the complete standalone synthetic example.
+end % Finish the standalone synthetic example.

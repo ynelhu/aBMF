@@ -1,0 +1,16 @@
+{
+  "name": "MaxCut_Mix",
+  "kind": "maxcut",
+  "input_archive": "codes.zip",
+  "input_sha256": "bb2765ccd76f35e6c9d68264a2bae4f1dba8a38f3af6c50335075fbdb729c8ab",
+  "gamma_rule": "max(min(previous,hat),check); retain previous for exact D=0",
+  "sigma_h": 0,
+  "matlab_module": "matlab-R2022b",
+  "partition": "CU",
+  "release": "formal_v2_slurm_path_fix",
+  "formal_entry": "RUN_FORMAL.sh",
+  "formal_profile": "standard",
+  "formal_suite": "main",
+  "formal_units": 10,
+  "formal_method_records": 120
+}
