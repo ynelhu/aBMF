@@ -16,7 +16,7 @@ A0 = [sparse(m,m),trainY; trainY',sparse(n,n)];
 A0 = triu(A0,1);
 idxs_A0 = find(A0); 
 %%%%%%%%%%%%%%%%%%%%%% Data preprocessing and initialization%%%%%%%%%%%%%%%
-opts.maxit = 1*1e2;  %% Maximum number of iterations
+opts.maxit = 1*1e3;  %% Maximum number of iterations
 opts.tol = 1e-4;     %% Tolerance
 opts.eta = 1e-3;     %% Regularization coefficient
 opts.gamma0 = 1e0;  %% Initial value of penalty parameter
